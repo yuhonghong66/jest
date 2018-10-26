@@ -101,9 +101,11 @@ export default class TestScheduler {
       (tests.length <= 20 && timings.length > 0 && areFastTests);
 
     const runInBand =
-      this._globalConfig.watch || this._globalConfig.watchAll
-        ? runInBandWatch
-        : runInBandNonWatch;
+      this._globalConfig.debug || (
+        this._globalConfig.watch || this._globalConfig.watchAll
+          ? runInBandWatch
+          : runInBandNonWatch
+      );
 
     const onResult = async (test: Test, testResult: TestResult) => {
       if (watcher.isInterrupted()) {
